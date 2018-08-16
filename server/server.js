@@ -13,6 +13,17 @@ var app = express();
 app.use(bodyParser.json());
 
 
+
+app.get('/todos', (req,res)=>{
+    console.log('inside todos');
+    Todo.find().then((docs) => {
+        console.log('inside success');
+        res.send(docs);
+    },(err)=>{
+        res.status(400).send(err);
+    })
+})
+
 app.get('/todos/:id', (req,res)=>{
     var id = req.params.id;
     console.log(res);
@@ -48,15 +59,6 @@ app.get('/todos/:id', (req,res)=>{
 //     })
 // })
 
-app.get('/todos', (req,res)=>{
-    console.log('inside todos');
-    Todo.find().then((docs) => {
-        console.log('inside success');
-        res.send(docs);
-    },(err)=>{
-        res.status(400).send(err);
-    })
-})
 
 
 
