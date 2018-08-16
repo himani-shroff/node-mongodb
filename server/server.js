@@ -44,20 +44,20 @@ app.get('/todos/:id', (req,res)=>{
 
 
 
-// app.post('/todos',(req,res)=>{
-//     console.log(`body: ${JSON.stringify(req.body)}`)
-//     var todo = new Todo({
-//         text: req.body.text,
-//         completed: req.body.completed
-//     })
+app.post('/todos',(req,res)=>{
+    console.log(`body: ${JSON.stringify(req.body)}`)
+    var todo = new Todo({
+        text: req.body.text,
+        completed: req.body.completed
+    })
 
-//     todo.save().then((doc)=>{
-//         res.send(doc);
-//         console.log(doc);
-//     },(err)=>{
-//         res.status(400).send(err);
-//     })
-// })
+    todo.save().then((doc)=>{
+        res.send(doc);
+        console.log(doc);
+    },(err)=>{
+        res.status(400).send(err);
+    })
+})
 
 
 
