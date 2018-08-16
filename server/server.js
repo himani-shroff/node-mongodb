@@ -48,13 +48,13 @@ app.get('/todos/:id', (req,res)=>{
 //     })
 // })
 
-// app.get('/todos', (req,res)=>{
-//     Todo.find({text: 'Cook Dinner'}).then((docs) => {
-//         res.send(docs);
-//     },(err)=>{
-//         res.status(400).send(err);
-//     })
-// })
+app.get('/todos', (req,res)=>{
+    Todo.find().then((docs) => {
+        res.send(docs);
+    },(err)=>{
+        res.status(400).send(err);
+    })
+})
 
 
 
