@@ -9,6 +9,7 @@ var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
 var app = express();
+let db = mongoose.connection;
 
 app.use(bodyParser.json());
 
@@ -45,18 +46,29 @@ app.get('/todos/:id', (req,res)=>{
 
 
 app.post('/todos',(req,res)=>{
-    console.log(`body: ${JSON.stringify(req.body)}`)
     var todo = new Todo({
         text: req.body.text,
         completed: req.body.completed
     })
+    db.on('error', function () {console.log('error');});
+    mongoose.connect(process.env.MONGODB_URI, function (err) {
+    if (err) {  return console.log('there was a problem' + err);  }
+    console.log('connected!');
+    todo.save(function (error, data) {
+    if (error) {console.log(error);} 
+    db.close();
+    process.exit();
+    });
+    });
+    console.log(`body: ${JSON.stringify(req.body)}`)
+    
 
-    todo.save().then((doc)=>{
-        res.send(doc);
-        console.log(doc);
-    },(err)=>{
-        res.status(400).send(err);
-    })
+    // todo.save().then((doc)=>{
+    //     res.send(doc);
+    //     console.log(doc);
+    // },(err)=>{
+    //     res.status(400).send(err);
+    // })
 })
 
 
