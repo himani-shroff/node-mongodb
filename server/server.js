@@ -51,7 +51,8 @@ app.post('/todos',(req,res)=>{
         completed: req.body.completed
     })
     db.on('error', function () {console.log('error');});
-    mongoose.connect(process.env.MONGODB_URI, function (err) {
+    console.log("MONGO_URI",process.env.MONGODB_URI);
+    mongoose.connect("mongodb://<himani.shroff>:<Pas$word99>@ds121262.mlab.com:21262/nodejs-mongoose-deployment", function (err) {
     if (err) {  return console.log('there was a problem' + err);  }
     console.log('connected!');
     todo.save(function (error, data) {
