@@ -28,7 +28,7 @@ app.get('/todos/:id', (req,res)=>{
     var id = req.params.id;
     console.log(res);
     if(!ObjectID.isValid(id)){
-       return res.status(400).send("Invalid ID")
+       return res.status(400).send("Please enter a valid ID")
     }
     Todo.findById(id).then((todo)=>{
         if(todo){
